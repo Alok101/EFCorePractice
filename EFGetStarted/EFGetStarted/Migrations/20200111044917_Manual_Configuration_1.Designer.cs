@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFGetStarted.Migrations
 {
     [DbContext(typeof(BloggingContext))]
-    [Migration("20200109164130_Add_Data_Into_Table_1")]
-    partial class Add_Data_Into_Table_1
+    [Migration("20200111044917_Manual_Configuration_1")]
+    partial class Manual_Configuration_1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -115,6 +115,33 @@ namespace EFGetStarted.Migrations
                     b.ToTable("Posts");
                 });
 
+            modelBuilder.Entity("EFGetStarted.Practice.Address", b =>
+                {
+                    b.Property<int>("AddressId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("District")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FlatNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StreetName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("AddressId");
+
+                    b.ToTable("Address");
+                });
+
             modelBuilder.Entity("EFGetStarted.Practice.Blog_AK", b =>
                 {
                     b.Property<int>("BlogId")
@@ -129,6 +156,36 @@ namespace EFGetStarted.Migrations
                     b.HasKey("BlogId");
 
                     b.ToTable("Blogs_AK");
+                });
+
+            modelBuilder.Entity("EFGetStarted.Practice.Blog_RS", b =>
+                {
+                    b.Property<int>("Blog_RSId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("URL")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Blog_RSId");
+
+                    b.ToTable("Blog_Rs");
+                });
+
+            modelBuilder.Entity("EFGetStarted.Practice.Courses", b =>
+                {
+                    b.Property<int>("CoursesId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CoursesId");
+
+                    b.ToTable("Courses");
                 });
 
             modelBuilder.Entity("EFGetStarted.Practice.CustomerWithNullReferenceType", b =>
@@ -188,8 +245,14 @@ namespace EFGetStarted.Migrations
                     b.Property<decimal>("HRA")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<DateTime>("LastUpdated")
+                        .HasColumnType("datetime2");
+
                     b.Property<decimal>("TotalSalary")
-                        .HasColumnType("decimal(18,2)");
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("decimal(18,2)")
+                        .HasComputedColumnSql("[BasicSalary]+[HRA]");
 
                     b.HasKey("EmpId");
 
@@ -236,6 +299,18 @@ namespace EFGetStarted.Migrations
                     b.ToTable("Key");
                 });
 
+            modelBuilder.Entity("EFGetStarted.Practice.OfficeLaptop", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OfficeLaptop");
+                });
+
             modelBuilder.Entity("EFGetStarted.Practice.Person", b =>
                 {
                     b.Property<int>("PersonId")
@@ -268,12 +343,41 @@ namespace EFGetStarted.Migrations
                     b.ToTable("Persons");
                 });
 
+            modelBuilder.Entity("EFGetStarted.Practice.PersonalInformation", b =>
+                {
+                    b.Property<int>("PersonalInformationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("AddressId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MiddleName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PersonalInformationId");
+
+                    b.HasIndex("AddressId");
+
+                    b.ToTable("PersonalInformation");
+                });
+
             modelBuilder.Entity("EFGetStarted.Practice.Post_AK", b =>
                 {
                     b.Property<int>("PostId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("BlogId")
+                        .HasColumnType("int");
 
                     b.Property<string>("BlogUrl")
                         .HasColumnType("nvarchar(450)");
@@ -289,6 +393,118 @@ namespace EFGetStarted.Migrations
                     b.HasIndex("BlogUrl");
 
                     b.ToTable("Posts_AK");
+                });
+
+            modelBuilder.Entity("EFGetStarted.Practice.Post_RS", b =>
+                {
+                    b.Property<int>("Post_RSId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("Blog_RSId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Post_RSId");
+
+                    b.HasIndex("Blog_RSId");
+
+                    b.ToTable("Post_Rs");
+                });
+
+            modelBuilder.Entity("EFGetStarted.Practice.Section", b =>
+                {
+                    b.Property<int>("SectionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("InchargeTeacherId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("SectionId");
+
+                    b.HasIndex("InchargeTeacherId");
+
+                    b.ToTable("Section");
+                });
+
+            modelBuilder.Entity("EFGetStarted.Practice.Student", b =>
+                {
+                    b.Property<int>("StudentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("CoursesId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PersonalInformationId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SectionId")
+                        .HasColumnType("int");
+
+                    b.HasKey("StudentId");
+
+                    b.HasIndex("CoursesId");
+
+                    b.HasIndex("PersonalInformationId");
+
+                    b.HasIndex("SectionId");
+
+                    b.ToTable("Students");
+                });
+
+            modelBuilder.Entity("EFGetStarted.Practice.Subject", b =>
+                {
+                    b.Property<int>("SubjectId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SectionId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TeacherId")
+                        .HasColumnType("int");
+
+                    b.HasKey("SubjectId");
+
+                    b.HasIndex("SectionId");
+
+                    b.HasIndex("TeacherId");
+
+                    b.ToTable("Subject");
+                });
+
+            modelBuilder.Entity("EFGetStarted.Practice.Teacher", b =>
+                {
+                    b.Property<int>("TeacherId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("PersonalInformationId")
+                        .HasColumnType("int");
+
+                    b.HasKey("TeacherId");
+
+                    b.HasIndex("PersonalInformationId");
+
+                    b.ToTable("Teachers");
                 });
 
             modelBuilder.Entity("EFGetStarted.ServerConfiguration", b =>
@@ -336,12 +552,70 @@ namespace EFGetStarted.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("EFGetStarted.Practice.PersonalInformation", b =>
+                {
+                    b.HasOne("EFGetStarted.Practice.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressId");
+                });
+
             modelBuilder.Entity("EFGetStarted.Practice.Post_AK", b =>
                 {
                     b.HasOne("EFGetStarted.Practice.Blog_AK", "Blog")
                         .WithMany("Posts")
                         .HasForeignKey("BlogUrl")
                         .HasPrincipalKey("Url");
+                });
+
+            modelBuilder.Entity("EFGetStarted.Practice.Post_RS", b =>
+                {
+                    b.HasOne("EFGetStarted.Practice.Blog_RS", "Blog")
+                        .WithMany("Posts")
+                        .HasForeignKey("Blog_RSId");
+                });
+
+            modelBuilder.Entity("EFGetStarted.Practice.Section", b =>
+                {
+                    b.HasOne("EFGetStarted.Practice.Teacher", "Incharge")
+                        .WithMany()
+                        .HasForeignKey("InchargeTeacherId");
+                });
+
+            modelBuilder.Entity("EFGetStarted.Practice.Student", b =>
+                {
+                    b.HasOne("EFGetStarted.Practice.Courses", "Courses")
+                        .WithMany()
+                        .HasForeignKey("CoursesId");
+
+                    b.HasOne("EFGetStarted.Practice.PersonalInformation", "PersonalInformation")
+                        .WithMany()
+                        .HasForeignKey("PersonalInformationId");
+
+                    b.HasOne("EFGetStarted.Practice.Section", "Section")
+                        .WithMany()
+                        .HasForeignKey("SectionId");
+                });
+
+            modelBuilder.Entity("EFGetStarted.Practice.Subject", b =>
+                {
+                    b.HasOne("EFGetStarted.Practice.Section", "Section")
+                        .WithMany("Subjects")
+                        .HasForeignKey("SectionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EFGetStarted.Practice.Teacher", "Teacher")
+                        .WithMany("Subjects")
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("EFGetStarted.Practice.Teacher", b =>
+                {
+                    b.HasOne("EFGetStarted.Practice.PersonalInformation", "PersonalInformation")
+                        .WithMany()
+                        .HasForeignKey("PersonalInformationId");
                 });
 #pragma warning restore 612, 618
         }

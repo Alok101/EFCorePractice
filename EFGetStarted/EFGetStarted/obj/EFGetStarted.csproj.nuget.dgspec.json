@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Programming_Practice\\EFGetStarted\\EFGetStarted\\EFGetStarted.csproj": {}
+    "D:\\EFCorePractice\\EFCorePractice\\EFGetStarted\\EFGetStarted\\EFGetStarted.csproj": {}
   },
   "projects": {
-    "E:\\Programming_Practice\\EFGetStarted\\EFGetStarted\\EFGetStarted.csproj": {
+    "D:\\EFCorePractice\\EFCorePractice\\EFGetStarted\\EFGetStarted\\EFGetStarted.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Programming_Practice\\EFGetStarted\\EFGetStarted\\EFGetStarted.csproj",
+        "projectUniqueName": "D:\\EFCorePractice\\EFCorePractice\\EFGetStarted\\EFGetStarted\\EFGetStarted.csproj",
         "projectName": "EFGetStarted",
-        "projectPath": "E:\\Programming_Practice\\EFGetStarted\\EFGetStarted\\EFGetStarted.csproj",
-        "packagesPath": "C:\\Users\\Alok Gautam\\.nuget\\packages\\",
-        "outputPath": "E:\\Programming_Practice\\EFGetStarted\\EFGetStarted\\obj\\",
+        "projectPath": "D:\\EFCorePractice\\EFCorePractice\\EFGetStarted\\EFGetStarted\\EFGetStarted.csproj",
+        "packagesPath": "C:\\Users\\alok.gautam\\.nuget\\packages\\",
+        "outputPath": "D:\\EFCorePractice\\EFCorePractice\\EFGetStarted\\EFGetStarted\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Alok Gautam\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\alok.gautam\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -25,6 +25,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -70,12 +71,30 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.0.1, 3.0.1]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[3.0.1, 3.0.1]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[3.0.0, 3.0.0]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[3.0.0, 3.0.0]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

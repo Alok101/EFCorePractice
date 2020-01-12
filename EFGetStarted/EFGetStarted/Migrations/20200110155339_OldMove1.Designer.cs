@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFGetStarted.Migrations
 {
     [DbContext(typeof(BloggingContext))]
-    [Migration("20200109164510_Add_Data_Into_Table_12")]
-    partial class Add_Data_Into_Table_12
+    [Migration("20200110155339_OldMove1")]
+    partial class OldMove1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -237,6 +237,18 @@ namespace EFGetStarted.Migrations
                         .HasName("Key_PK_Composite");
 
                     b.ToTable("Key");
+                });
+
+            modelBuilder.Entity("EFGetStarted.Practice.OfficeLaptop", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OfficeLaptop");
                 });
 
             modelBuilder.Entity("EFGetStarted.Practice.Person", b =>
